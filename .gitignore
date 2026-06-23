@@ -5,3 +5,25 @@ __pycache__/
 .env
 .DS_Store
 Thumbs.db
+
+# secrets — never commit API tokens
+ts_token.txt
+*.token
+config.local.json
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.run.xml
+*.bcf
+
+*.xdv

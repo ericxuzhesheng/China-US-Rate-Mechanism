@@ -3,3 +3,5 @@ numpy>=1.24
 statsmodels>=0.14
 matplotlib>=3.7
 akshare>=1.18
+tushare>=1.4
+pypdf>=4.0

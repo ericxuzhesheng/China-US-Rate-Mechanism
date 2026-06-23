@@ -13,16 +13,32 @@
 ```
 .
 ├── report/
-│   ├── 中美利率决定机制差异_量化研究报告.md   # 主报告（正文）
-│   ├── results.md                            # 计量结果汇总（代码自动生成）
-│   └── results.json                          # 机器可读结果
+│   ├── paper.tex                             # 学术论文 LaTeX 源（xelatex/ctex）
+│   ├── paper.pdf                             # ★ 编译产物：约 50 页学术论文（23 图）
+│   ├── 中美利率决定机制差异_量化研究报告.md   # Markdown 版报告
+│   ├── results.md / results.json             # 基础计量结果（自动生成）
+│   ├── results2.json / results3.json         # 扩展结果（曲线/PCA/SVAR/Granger）
 ├── code/
-│   ├── data_fetch.py    # 抓取美国(FRED)/中国(akshare)数据 → data/*.csv
-│   ├── analysis.py      # 泰勒规则/ECM传导/协整/波动 → report/results.* + figures/*
+│   ├── data_fetch.py     # FRED + akshare → data/*.csv
+│   ├── tushare_fetch.py  # Tushare Pro：美债曲线/SHIBOR/LPR/CPI/PPI/M2
+│   ├── analysis.py       # 泰勒规则/ECM传导/协整/波动
+│   ├── analysis2.py      # 收益率曲线/PCA/M2/实际利率/利率走廊/Granger
+│   ├── analysis3.py      # SVAR脉冲响应/滚动参数/领先滞后/子样本/相关矩阵
 │   └── requirements.txt
-├── data/                # 原始与对齐后的月度面板（CSV）
-└── figures/             # 图表（PNG）
+├── data/                 # 原始与对齐后的月度面板（CSV）
+└── figures/              # 23 张图表（PNG）
 ```
+
+## 编译 PDF / Build the paper
+
+```bash
+# 需 TeX Live（xelatex + ctex）
+export TS_TOKEN=<your_tushare_token>   # 或写入 code/ts_token.txt（已 gitignore）
+python code/data_fetch.py && python code/tushare_fetch.py
+python code/analysis.py && python code/analysis2.py && python code/analysis3.py
+cd report && latexmk -xelatex paper.tex   # 或：xelatex paper.tex（运行两遍）
+```
+产物为 `report/paper.pdf`（约 50 页，标准学术论文格式：摘要/JEL、文献综述、制度背景、理论与假说、数据方法、实证、动态分析、机制成因、资产配置、稳健性、结论、35+ 参考文献、附录）。
 
 ## 复现 / Reproduce
 
