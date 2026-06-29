@@ -26,4 +26,9 @@ config.local.json
 *.run.xml
 *.bcf
 
+# auto-generated analysis results (run code/analysis*.py to regenerate)
+report/results*.json
+report/results*.md
+report/中美利率决定机制差异_量化研究报告.md
+
 *.xdv

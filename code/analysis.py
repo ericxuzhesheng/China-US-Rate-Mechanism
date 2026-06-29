@@ -288,7 +288,7 @@ def spread_analysis(m, cn):
         return None
     d = pd.DataFrame({
         "us10": m["ust_10y"], "cn10": cn["cn_10y"],
-    }).dropna()
+    }).dropna().loc["2011":]   # 中国样本统一自 2011 年起
     d["spread"] = d["cn10"] - d["us10"]
     # 协整检验
     cp = float(coint(d["cn10"], d["us10"])[1])

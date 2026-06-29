@@ -13,6 +13,7 @@
 \usepackage{float}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage[super,numbers,sort&compress]{natbib}
 \usepackage[hidelinks]{hyperref}
 \usepackage{enumitem}
 \usepackage{fancyhdr}
@@ -34,9 +35,9 @@
 
 \newtheorem{hypothesis}{假说}
 \newcommand{\code}[1]{\texttt{#1}}
-% 手写参考文献：将 natbib 风格命令别名为标准 \cite
-\newcommand{\citet}[1]{\cite{#1}}
-\newcommand{\citealp}[1]{\cite{#1}}
+% 正文引用统一为数字上标角标（APA 条目 + 顺序编号），\citet/\citealp 归一为 \citep
+\renewcommand{\citet}[1]{\citep{#1}}
+\renewcommand{\citealp}[1]{\citep{#1}}
 
 \title{\textbf{中美利率决定机制的差异：一个量化研究}\\[6pt]
 \large A Quantitative Study on the Differences between China's and \\ the U.S. Interest-Rate Determination Mechanisms}
@@ -50,9 +51,9 @@
 
 \begin{abstract}
 \noindent
-本文从计量经济学视角，系统比较中美两国利率的决定机制与背后驱动因素，并识别其结构性差异。我们整合 FRED、Tushare Pro 与 akshare 的公开数据，构建 1990--2026 年（美国）与 2007/2011--2026 年（中国）的月度面板，依次估计：(1) 两国货币政策\textbf{反应函数}（含利率平滑的泰勒规则）；(2) 政策/货币市场利率向长端的\textbf{传导}（误差修正模型与协整）；(3) 收益率曲线的\textbf{主成分结构}（水平/斜率/曲率）；(4) 货币\textbf{数量渠道}（M2 增速）与\textbf{实际利率}（名义减 CPI/PPI）；(5) 中美利率的\textbf{联动性}（滚动相关、Granger 因果、协整）。
+本文从计量经济学视角，系统比较中美两国利率的决定机制与背后驱动因素，并识别其结构性差异。我们整合 FRED、Tushare Pro 与 akshare 的公开数据，构建 1990--2026 年（美国）与 2011--2026 年（中国）的月度面板，依次估计：(1) 两国货币政策\textbf{反应函数}（含利率平滑的泰勒规则）；(2) 政策/货币市场利率向长端的\textbf{传导}（误差修正模型与协整）；(3) 收益率曲线的\textbf{主成分结构}（水平/斜率/曲率）；(4) 货币\textbf{数量渠道}（M2 增速）与\textbf{实际利率}（名义减 CPI/PPI）；(5) 中美利率的\textbf{联动性}（滚动相关、Granger 因果、协整）。
 
-主要发现：美联储反应函数满足泰勒原则（对通胀的长期反应系数 $\phi_\pi\approx 1.51>1$），价格规则解释力高（$R^2\approx 0.99$）；中国以货币市场利率度量的"类泰勒规则"中 $\phi_\pi\approx 0.30<1$、$R^2\approx 0.76$，价格规则较弱、数量价格双轨并行。利率传导上，美国"政策$\to$短端"即期传导 0.39、长期 0.82，市场化、即时；中国"货币市场$\to$长端"即期传导仅 0.03、半衰期约 10 个月，分层而黏滞。中美 10 年期国债收益率\textbf{水平相关为 $-0.18$}、不协整，利差由历史均值 $+0.39\%$ 转为 2026 年中的深度倒挂；但 Granger 检验显示美国利率变动对中国存在单向短期溢出（$p\approx 0.02$）。我们据此提出"双周期独立、本币利率分别折现"的大类资产配置框架。
+主要发现：美联储反应函数满足泰勒原则（对通胀的长期反应系数 $\phi_\pi\approx 1.51>1$），价格规则解释力高（$R^2\approx 0.99$）；中国以货币市场利率度量的"类泰勒规则"中 $\phi_\pi\approx 0.30<1$、$R^2\approx 0.76$，价格规则较弱、数量价格双轨并行。利率传导上，美国"政策$\to$短端"即期传导 0.39、长期 0.82，市场化、即时；中国"货币市场$\to$长端"即期传导仅 0.03、半衰期约 10 个月，分层而黏滞。中美 10 年期国债收益率\textbf{水平相关为 $-0.47$}、不协整，利差由历史均值 $+0.48\%$ 转为 2026 年中的深度倒挂；但 Granger 检验显示美国利率变动对中国存在单向短期溢出（$p\approx 0.02$）。我们据此提出"双周期独立、本币利率分别折现"的大类资产配置框架。
 
 \noindent\textbf{关键词：} 利率决定机制；货币政策反应函数；泰勒规则；利率传导；误差修正模型；收益率曲线；利率走廊；LPR；大类资产配置
 
@@ -309,7 +310,7 @@ i_t^{CN}-i_t^{US} \approx E_t\Delta s_{t+1} + \theta_t\;\;(\text{UIP}),
 
 \begin{figure}[H]\centering
 \includegraphics[width=0.9\textwidth]{f06_cn_curve_heatmap.png}
-\caption{中国国债收益率曲线演变（2007--2026）。中枢更平稳，近年趋势性下移。}
+\caption{中国国债收益率曲线演变（2011--2026）。中枢更平稳，近年趋势性下移。}
 \label{fig:cnheat}
 \end{figure}
 
@@ -478,7 +479,7 @@ $R^2$ & 0.994 & & $R^2$ & 0.761 & \\
 \end{figure}
 
 \subsection{中美联动、利差与溢出（检验假说~\ref{h5}）}
-图~\ref{fig:spread} 给出中美 10 年期收益率与利差。两者水平相关系数为 $-0.18$（负），一阶差分相关 0.23（弱正），协整检验 $p=0.62$（不协整）；利差由历史均值 $+0.39\%$ 转为 2026 年中的深度倒挂。
+图~\ref{fig:spread} 给出中美 10 年期收益率与利差。两者水平相关系数为 $-0.47$（负），一阶差分相关 0.20（弱正），协整检验 $p=0.41$（不协整）；利差由历史均值 $+0.48\%$ 转为 2026 年中的深度倒挂（样本 2011--2026）。
 
 \begin{figure}[H]\centering
 \includegraphics[width=0.92\textwidth]{spread_cn_us_10y.png}
@@ -569,7 +570,7 @@ $R^2$ & 0.994 & & $R^2$ & 0.761 & \\
 规则强度 & 满足泰勒原则、强价格规则 & 价格规则弱、数量价格双轨 & 反应函数 \\
 传导速度 & 快、充分、市场化 & 慢、分层、黏滞 & 政策$\to$2Y 即期 0.39 vs SHIBOR$\to$10Y 即期 0.03 \\
 波动指纹 & 短端最稳、长端最活 & 货币市场最活、信贷基准最稳 & $\Delta\sigma$：0.15 / 0.48 / 0.06 \\
-跨国约束 & 嵌入全球套利 & 资本管理 $\to$ 自主性强 & 相关 $-0.18$、不协整；US$\to$CN 溢出 $p=0.02$ \\
+跨国约束 & 嵌入全球套利 & 资本管理 $\to$ 自主性强 & 相关 $-0.47$、不协整；US$\to$CN 溢出 $p=0.02$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -609,7 +610,7 @@ $R^2$ & 0.994 & & $R^2$ & 0.761 & \\
 由于两国周期可独立（假说~\ref{h5}），传统"利差走阔$\to$人民币升值"的线性关系弱化。2022 年以来出现"深度负利差 $+$ 汇率由经常账户、预期与资本流动管理共同主导"的新格局。配置上应将\textbf{利差}与\textbf{风险溢价/资本流动}分离看待，而非以利差单一驱动汇率判断。
 
 \subsection{久期策略的分国别定价}
-中国长端由国内政策中枢与基本面慢变量决定、对货币市场扰动钝感（即期传导 0.03），故中债久期更受国内宽松周期与"资产荒"驱动；美债久期则对 FOMC 路径与期限溢价高度敏感。两者历史水平相关为负（$-0.18$），可作为分散化资产组合：在美债因加息承压时，中债可因国内宽松而走牛。
+中国长端由国内政策中枢与基本面慢变量决定、对货币市场扰动钝感（即期传导 0.03），故中债久期更受国内宽松周期与"资产荒"驱动；美债久期则对 FOMC 路径与期限溢价高度敏感。两者历史水平相关为负（$-0.47$），可作为分散化资产组合：在美债因加息承压时，中债可因国内宽松而走牛。
 
 \subsection{贴现率与权益估值}
 美股贴现率紧随美债曲线与实际利率（约 1.7\%）；A 股贴现率更受国内低而稳的 LPR/中债与风险偏好影响。中美无风险贴现锚不同步，意味着跨市场相对估值需各自以本币利率体系折现，不能简单套用同一贴现率。
@@ -690,41 +691,41 @@ $R^2$ & 0.994 & & $R^2$ & 0.761 & \\
 \clearpage
 \begin{thebibliography}{99}
 \small
-\bibitem[Adrian et al.(2013)]{adrian2013} Adrian, T., Crump, R. K., \& Moench, E. (2013). Pricing the term structure with linear regressions. \emph{Journal of Financial Economics}, 110(1), 110--138.
-\bibitem[Bernanke \& Blinder(1992)]{bernanke1992} Bernanke, B. S., \& Blinder, A. S. (1992). The federal funds rate and the channels of monetary transmission. \emph{American Economic Review}, 82(4), 901--921.
-\bibitem[Campbell \& Shiller(1991)]{campbell1991} Campbell, J. Y., \& Shiller, R. J. (1991). Yield spreads and interest rate movements: A bird's eye view. \emph{Review of Economic Studies}, 58(3), 495--514.
-\bibitem[Chen et al.(2018)]{chen2018} Chen, H., Chen, Q., \& Gerlach, S. (2018). The implementation of monetary policy in China: The interbank market and bank lending. \emph{Global Finance Journal}.
-\bibitem[Clarida et al.(2000)]{clarida2000} Clarida, R., Gal\'i, J., \& Gertler, M. (2000). Monetary policy rules and macroeconomic stability: Evidence and some theory. \emph{Quarterly Journal of Economics}, 115(1), 147--180.
-\bibitem[Diebold \& Li(2006)]{diebold2006} Diebold, F. X., \& Li, C. (2006). Forecasting the term structure of government bond yields. \emph{Journal of Econometrics}, 130(2), 337--364.
-\bibitem[Engle \& Granger(1987)]{engle1987} Engle, R. F., \& Granger, C. W. J. (1987). Co-integration and error correction: Representation, estimation, and testing. \emph{Econometrica}, 55(2), 251--276.
-\bibitem[Estrella \& Mishkin(1998)]{estrella1998} Estrella, A., \& Mishkin, F. S. (1998). Predicting U.S. recessions: Financial variables as leading indicators. \emph{Review of Economics and Statistics}, 80(1), 45--61.
-\bibitem[Fernald et al.(2014)]{fernald2014} Fernald, J. G., Spiegel, M. M., \& Swanson, E. T. (2014). Monetary policy effectiveness in China: Evidence from a FAVAR model. \emph{Journal of International Money and Finance}, 49, 83--103.
-\bibitem[Girardin et al.(2017)]{girardin2017} Girardin, E., Lunven, S., \& Ma, G. (2017). China's evolving monetary policy rule: From inflation-accommodating to anti-inflation policy. \emph{BIS Working Papers} No. 641.
-\bibitem[G\"urkaynak et al.(2007)]{gurkaynak2007} G\"urkaynak, R. S., Sack, B., \& Wright, J. H. (2007). The U.S. Treasury yield curve: 1961 to the present. \emph{Journal of Monetary Economics}, 54(8), 2291--2304.
-\bibitem[He \& Wang(2012)]{he2012} He, D., \& Wang, H. (2012). Dual-track interest rates and the conduct of monetary policy in China. \emph{China Economic Review}, 23(4), 928--947.
-\bibitem[Litterman \& Scheinkman(1991)]{litterman1991} Litterman, R., \& Scheinkman, J. (1991). Common factors affecting bond returns. \emph{Journal of Fixed Income}, 1(1), 54--61.
-\bibitem[Miranda-Agrippino \& Rey(2020)]{miranda2020} Miranda-Agrippino, S., \& Rey, H. (2020). U.S. monetary policy and the global financial cycle. \emph{Review of Economic Studies}, 87(6), 2754--2776.
-\bibitem[Obstfeld et al.(2005)]{obstfeld2004} Obstfeld, M., Shambaugh, J. C., \& Taylor, A. M. (2005). The trilemma in history: Tradeoffs among exchange rates, monetary policies, and capital mobility. \emph{Review of Economics and Statistics}, 87(3), 423--438.
-\bibitem[Orphanides(2001)]{orphanides2001} Orphanides, A. (2001). Monetary policy rules based on real-time data. \emph{American Economic Review}, 91(4), 964--985.
-\bibitem[Porter \& Xu(2009)]{porter2010} Porter, N., \& Xu, T. (2009). What drives China's interbank market? \emph{IMF Working Paper} WP/09/189.
-\bibitem[Rey(2015)]{rey2015} Rey, H. (2015). Dilemma not trilemma: The global financial cycle and monetary policy independence. \emph{NBER Working Paper} No. 21162.
-\bibitem[Rudebusch(2002)]{rudebusch2002} Rudebusch, G. D. (2002). Term structure evidence on interest rate smoothing and monetary policy inertia. \emph{Journal of Monetary Economics}, 49(6), 1161--1187.
-\bibitem[Sims(1980)]{sims1980} Sims, C. A. (1980). Macroeconomics and reality. \emph{Econometrica}, 48(1), 1--48.
-\bibitem[Taylor(1993)]{taylor1993} Taylor, J. B. (1993). Discretion versus policy rules in practice. \emph{Carnegie-Rochester Conference Series on Public Policy}, 39, 195--214.
-\bibitem[Woodford(2003)]{woodford2003} Woodford, M. (2003). \emph{Interest and Prices: Foundations of a Theory of Monetary Policy}. Princeton University Press.
-\bibitem[Wu \& Xia(2016)]{wuxia2016} Wu, J. C., \& Xia, F. D. (2016). Measuring the macroeconomic impact of monetary policy at the zero lower bound. \emph{Journal of Money, Credit and Banking}, 48(2-3), 253--291.
-\bibitem[易纲(2021)]{yigang2021} 易纲. (2021). 中国的利率体系与利率市场化改革. \emph{金融研究}, 总第 495 期.
-\bibitem[孙国峰(2017)]{sunguofeng2017} 孙国峰, 蔡春春. (2017). 货币市场利率、流动性供求与中央银行流动性管理. \emph{经济研究}.
-\bibitem[中国人民银行]{pboc} 中国人民银行. 《货币政策执行报告》（历期）.
-\bibitem[Kim \& Wright(2005)]{kim2005} Kim, D. H., \& Wright, J. H. (2005). An arbitrage-free three-factor term structure model and the recent behavior of long-term yields and distant-horizon forward rates. \emph{FEDS Working Paper}.
-\bibitem[Cochrane \& Piazzesi(2005)]{cochrane2005} Cochrane, J. H., \& Piazzesi, M. (2005). Bond risk premia. \emph{American Economic Review}, 95(1), 138--160.
-\bibitem[Hamilton \& Wu(2012)]{hamilton2012} Hamilton, J. D., \& Wu, J. C. (2012). The effectiveness of alternative monetary policy tools in a zero lower bound environment. \emph{Journal of Money, Credit and Banking}, 44, 3--46.
-\bibitem[Bauer \& Rudebusch(2020)]{bauer2020} Bauer, M. D., \& Rudebusch, G. D. (2020). Interest rates under falling stars. \emph{American Economic Review}, 110(5), 1316--1354.
-\bibitem[Coibion \& Gorodnichenko(2012)]{coibion2012} Coibion, O., \& Gorodnichenko, Y. (2012). Why are target interest rate changes so persistent? \emph{American Economic Journal: Macroeconomics}, 4(4), 126--162.
-\bibitem[Stock \& Watson(2001)]{stock2001} Stock, J. H., \& Watson, M. W. (2001). Vector autoregressions. \emph{Journal of Economic Perspectives}, 15(4), 101--115.
-\bibitem[Taylor \& Williams(2009)]{taylor2009} Taylor, J. B., \& Williams, J. C. (2009). A black swan in the money market. \emph{American Economic Journal: Macroeconomics}, 1(1), 58--83.
-\bibitem[Mishkin(2007)]{mishkin2007} Mishkin, F. S. (2007). \emph{The Economics of Money, Banking, and Financial Markets}. Pearson.
-\bibitem[Ma et al.(2013)]{ma2013} Ma, G., Yan, X., \& Liu, X. (2013). China's evolving reserve requirements. \emph{Journal of Chinese Economic and Business Studies}, 11(2), 117--137.
+\bibitem{adrian2013} Adrian, T., Crump, R. K., \& Moench, E. (2013). Pricing the term structure with linear regressions. \emph{Journal of Financial Economics}, 110(1), 110--138.
+\bibitem{bernanke1992} Bernanke, B. S., \& Blinder, A. S. (1992). The federal funds rate and the channels of monetary transmission. \emph{American Economic Review}, 82(4), 901--921.
+\bibitem{campbell1991} Campbell, J. Y., \& Shiller, R. J. (1991). Yield spreads and interest rate movements: A bird's eye view. \emph{Review of Economic Studies}, 58(3), 495--514.
+\bibitem{chen2018} Chen, H., Chen, Q., \& Gerlach, S. (2018). The implementation of monetary policy in China: The interbank market and bank lending. \emph{Global Finance Journal}.
+\bibitem{clarida2000} Clarida, R., Gal\'i, J., \& Gertler, M. (2000). Monetary policy rules and macroeconomic stability: Evidence and some theory. \emph{Quarterly Journal of Economics}, 115(1), 147--180.
+\bibitem{diebold2006} Diebold, F. X., \& Li, C. (2006). Forecasting the term structure of government bond yields. \emph{Journal of Econometrics}, 130(2), 337--364.
+\bibitem{engle1987} Engle, R. F., \& Granger, C. W. J. (1987). Co-integration and error correction: Representation, estimation, and testing. \emph{Econometrica}, 55(2), 251--276.
+\bibitem{estrella1998} Estrella, A., \& Mishkin, F. S. (1998). Predicting U.S. recessions: Financial variables as leading indicators. \emph{Review of Economics and Statistics}, 80(1), 45--61.
+\bibitem{fernald2014} Fernald, J. G., Spiegel, M. M., \& Swanson, E. T. (2014). Monetary policy effectiveness in China: Evidence from a FAVAR model. \emph{Journal of International Money and Finance}, 49, 83--103.
+\bibitem{girardin2017} Girardin, E., Lunven, S., \& Ma, G. (2017). China's evolving monetary policy rule: From inflation-accommodating to anti-inflation policy. \emph{BIS Working Papers} No. 641.
+\bibitem{gurkaynak2007} G\"urkaynak, R. S., Sack, B., \& Wright, J. H. (2007). The U.S. Treasury yield curve: 1961 to the present. \emph{Journal of Monetary Economics}, 54(8), 2291--2304.
+\bibitem{he2012} He, D., \& Wang, H. (2012). Dual-track interest rates and the conduct of monetary policy in China. \emph{China Economic Review}, 23(4), 928--947.
+\bibitem{litterman1991} Litterman, R., \& Scheinkman, J. (1991). Common factors affecting bond returns. \emph{Journal of Fixed Income}, 1(1), 54--61.
+\bibitem{miranda2020} Miranda-Agrippino, S., \& Rey, H. (2020). U.S. monetary policy and the global financial cycle. \emph{Review of Economic Studies}, 87(6), 2754--2776.
+\bibitem{obstfeld2004} Obstfeld, M., Shambaugh, J. C., \& Taylor, A. M. (2005). The trilemma in history: Tradeoffs among exchange rates, monetary policies, and capital mobility. \emph{Review of Economics and Statistics}, 87(3), 423--438.
+\bibitem{orphanides2001} Orphanides, A. (2001). Monetary policy rules based on real-time data. \emph{American Economic Review}, 91(4), 964--985.
+\bibitem{porter2010} Porter, N., \& Xu, T. (2009). What drives China's interbank market? \emph{IMF Working Paper} WP/09/189.
+\bibitem{rey2015} Rey, H. (2015). Dilemma not trilemma: The global financial cycle and monetary policy independence. \emph{NBER Working Paper} No. 21162.
+\bibitem{rudebusch2002} Rudebusch, G. D. (2002). Term structure evidence on interest rate smoothing and monetary policy inertia. \emph{Journal of Monetary Economics}, 49(6), 1161--1187.
+\bibitem{sims1980} Sims, C. A. (1980). Macroeconomics and reality. \emph{Econometrica}, 48(1), 1--48.
+\bibitem{taylor1993} Taylor, J. B. (1993). Discretion versus policy rules in practice. \emph{Carnegie-Rochester Conference Series on Public Policy}, 39, 195--214.
+\bibitem{woodford2003} Woodford, M. (2003). \emph{Interest and Prices: Foundations of a Theory of Monetary Policy}. Princeton University Press.
+\bibitem{wuxia2016} Wu, J. C., \& Xia, F. D. (2016). Measuring the macroeconomic impact of monetary policy at the zero lower bound. \emph{Journal of Money, Credit and Banking}, 48(2-3), 253--291.
+\bibitem{yigang2021} 易纲. (2021). 中国的利率体系与利率市场化改革. \emph{金融研究}, 总第 495 期.
+\bibitem{sunguofeng2017} 孙国峰, 蔡春春. (2017). 货币市场利率、流动性供求与中央银行流动性管理. \emph{经济研究}.
+\bibitem{pboc} 中国人民银行. 《货币政策执行报告》（历期）.
+\bibitem{kim2005} Kim, D. H., \& Wright, J. H. (2005). An arbitrage-free three-factor term structure model and the recent behavior of long-term yields and distant-horizon forward rates. \emph{FEDS Working Paper}.
+\bibitem{cochrane2005} Cochrane, J. H., \& Piazzesi, M. (2005). Bond risk premia. \emph{American Economic Review}, 95(1), 138--160.
+\bibitem{hamilton2012} Hamilton, J. D., \& Wu, J. C. (2012). The effectiveness of alternative monetary policy tools in a zero lower bound environment. \emph{Journal of Money, Credit and Banking}, 44, 3--46.
+\bibitem{bauer2020} Bauer, M. D., \& Rudebusch, G. D. (2020). Interest rates under falling stars. \emph{American Economic Review}, 110(5), 1316--1354.
+\bibitem{coibion2012} Coibion, O., \& Gorodnichenko, Y. (2012). Why are target interest rate changes so persistent? \emph{American Economic Journal: Macroeconomics}, 4(4), 126--162.
+\bibitem{stock2001} Stock, J. H., \& Watson, M. W. (2001). Vector autoregressions. \emph{Journal of Economic Perspectives}, 15(4), 101--115.
+\bibitem{taylor2009} Taylor, J. B., \& Williams, J. C. (2009). A black swan in the money market. \emph{American Economic Journal: Macroeconomics}, 1(1), 58--83.
+\bibitem{mishkin2007} Mishkin, F. S. (2007). \emph{The Economics of Money, Banking, and Financial Markets}. Pearson.
+\bibitem{ma2013} Ma, G., Yan, X., \& Liu, X. (2013). China's evolving reserve requirements. \emph{Journal of Chinese Economic and Business Studies}, 11(2), 117--137.
 \end{thebibliography}
 
 % =====================================================================
@@ -813,6 +814,6 @@ cd report && latexmk -xelatex paper.tex
 \end{description}
 
 \section{核心结果数值索引}
-反应函数：美 $\phi_\pi=1.51$、$R^2=0.99$；中 $\phi_\pi=0.30$、$R^2=0.76$。传导：美 FF$\to$2Y 即期 0.39/长期 0.82；中 SHIBOR$\to$10Y 即期 0.03/长期 0.57（协整 $p=0.001$）。曲线 PCA：美 94.1/5.4/0.5\%，中 92.0/7.1/0.5\%。M2 增速：均值 13.7\% $\to$ 期末 8.6\%。中美 10Y：水平相关 $-0.18$、滚动相关期末 $-0.24$、不协整（$p=0.62$）、利差期末深度倒挂；Granger US$\to$CN $p=0.020$、CN$\to$US $p=0.291$。
+反应函数：美 $\phi_\pi=1.51$、$R^2=0.99$；中 $\phi_\pi=0.30$、$R^2=0.76$。传导：美 FF$\to$2Y 即期 0.39/长期 0.82；中 SHIBOR$\to$10Y 即期 0.03/长期 0.57（协整 $p=0.001$）。曲线 PCA：美 94.1/5.4/0.5\%，中 92.0/7.1/0.5\%。M2 增速：均值 13.7\% $\to$ 期末 8.6\%。中美 10Y：水平相关 $-0.47$、滚动相关期末 $-0.24$、不协整（$p=0.41$）、利差期末深度倒挂；Granger US$\to$CN $p=0.020$、CN$\to$US $p=0.291$。
 
 \end{document}

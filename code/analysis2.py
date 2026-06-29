@@ -98,14 +98,14 @@ def fig_cn_curve_heatmap(d):
     by = d["cn_curve"]
     terms = [c for c in ["3月", "6月", "1年", "3年", "5年", "7年", "10年", "30年"] if c in by.columns]
     cn = by[terms].apply(pd.to_numeric, errors="coerce")
-    cnm = cn.groupby(me(cn.index)).last().loc["2007":]
+    cnm = cn.groupby(me(cn.index)).last().loc["2011":]
     fig, ax = plt.subplots(figsize=(11, 5))
     im = ax.imshow(cnm.T.values, aspect="auto", cmap="RdYlBu_r", origin="lower",
                    extent=[0, len(cnm), 0, cnm.shape[1]])
     ax.set_yticks(np.arange(cnm.shape[1]) + 0.5); ax.set_yticklabels(terms)
     xt = np.linspace(0, len(cnm) - 1, 8).astype(int)
     ax.set_xticks(xt); ax.set_xticklabels([cnm.index[i].strftime("%Y") for i in xt])
-    ax.set_title("China Treasury Yield Curve Evolution (2007-2026)")
+    ax.set_title("China Treasury Yield Curve Evolution (2011-2026)")
     fig.colorbar(im, label="Yield (%)")
     fig.tight_layout(); fig.savefig(os.path.join(FIG, "f06_cn_curve_heatmap.png"), dpi=130); plt.close(fig)
 
@@ -137,9 +137,9 @@ def fig_curve_snapshots(d):
 
 def fig_term_spread(d):
     us = d["us_curve"].groupby(me(d["us_curve"].index)).last()
-    us_spread = (us["y10"] - us["y2"]).loc["2007":]
+    us_spread = (us["y10"] - us["y2"]).loc["2011":]
     cnp = d["cn_panel"]
-    cn_spread = (cnp["cn_10y"] - cnp.get("cn_2y", cnp.get("cn_1y"))).loc["2007":]
+    cn_spread = (cnp["cn_10y"] - cnp.get("cn_2y", cnp.get("cn_1y"))).loc["2011":]
     fig, ax = plt.subplots(figsize=(11, 5))
     ax.plot(us_spread.index, us_spread, label="US 10Y-2Y", color=RED)
     ax.plot(cn_spread.index, cn_spread, label="CN 10Y-2Y", color=BLUE)
@@ -173,7 +173,7 @@ def yield_pca(df, terms, label, fname):
 def fig_pca(d):
     us = d["us_curve"].groupby(me(d["us_curve"].index)).last().loc["2000":]
     yield_pca(us, ["m3", "m6", "y1", "y2", "y3", "y5", "y7", "y10"], "US", "f09a_us_pca.png")
-    by = d["cn_curve"].groupby(me(d["cn_curve"].index)).last().loc["2007":]
+    by = d["cn_curve"].groupby(me(d["cn_curve"].index)).last().loc["2011":]
     terms = [c for c in ["3月", "6月", "1年", "3年", "5年", "7年", "10年"] if c in by.columns]
     yield_pca(by, terms, "CN", "f09b_cn_pca.png")
 
@@ -203,9 +203,9 @@ def fig_real_rates(d):
     real_ppi = (cn10 - ppi).dropna()
     us_real = (usp["ust_10y"] - usp["core_pce_yoy"]).dropna()
     fig, ax = plt.subplots(figsize=(11, 5))
-    ax.plot(real_cpi.loc["2008":].index, real_cpi.loc["2008":], label="CN real (10Y - CPI)", color=BLUE)
-    ax.plot(real_ppi.loc["2008":].index, real_ppi.loc["2008":], label="CN real (10Y - PPI)", color=ORANGE)
-    ax.plot(us_real.loc["2008":].index, us_real.loc["2008":], label="US real (10Y - core PCE)", color=RED)
+    ax.plot(real_cpi.loc["2011":].index, real_cpi.loc["2011":], label="CN real (10Y - CPI)", color=BLUE)
+    ax.plot(real_ppi.loc["2011":].index, real_ppi.loc["2011":], label="CN real (10Y - PPI)", color=ORANGE)
+    ax.plot(us_real.loc["2011":].index, us_real.loc["2011":], label="US real (10Y - core PCE)", color=RED)
     ax.axhline(0, color="black", lw=0.7)
     ax.set_title("Ex-post Real 10Y Yields: China (vs CPI & PPI) and US")
     ax.set_ylabel("%"); ax.legend()
@@ -220,9 +220,9 @@ def fig_inflation(d):
     ppi = d["ppi"]["ppi_yoy"].groupby(me(d["ppi"].index)).last()
     usp = d["us_panel"]
     fig, ax = plt.subplots(figsize=(11, 5))
-    ax.plot(cpi.loc["2005":].index, cpi.loc["2005":], label="CN CPI YoY", color=BLUE)
-    ax.plot(ppi.loc["2005":].index, ppi.loc["2005":], label="CN PPI YoY", color=ORANGE)
-    ax.plot(usp["core_pce_yoy"].loc["2005":].index, usp["core_pce_yoy"].loc["2005":], label="US core PCE YoY", color=RED)
+    ax.plot(cpi.loc["2011":].index, cpi.loc["2011":], label="CN CPI YoY", color=BLUE)
+    ax.plot(ppi.loc["2011":].index, ppi.loc["2011":], label="CN PPI YoY", color=ORANGE)
+    ax.plot(usp["core_pce_yoy"].loc["2011":].index, usp["core_pce_yoy"].loc["2011":], label="US core PCE YoY", color=RED)
     ax.axhline(0, color="black", lw=0.6); ax.axhline(2, color="grey", ls="--", lw=0.6)
     ax.set_title("Inflation: China CPI/PPI vs US core PCE")
     ax.set_ylabel("YoY %"); ax.legend()
@@ -250,9 +250,9 @@ def fig_corridor(d):
     lpr = d["lpr"]["1y"].reindex(pd.date_range(d["lpr"].index.min(), "2026-06-30", freq="D")).ffill()
     lprm = lpr.groupby(me(lpr.index)).last()
     fig, ax = plt.subplots(figsize=(11, 5))
-    ax.plot(on.loc["2014":].index, on.loc["2014":], label="SHIBOR O/N", color=GREEN, alpha=0.8)
-    ax.plot(w1.loc["2014":].index, w1.loc["2014":], label="SHIBOR 1W (~DR007)", color=BLUE)
-    ax.plot(lprm.loc["2014":].index, lprm.loc["2014":], label="LPR 1Y", color=RED)
+    ax.plot(on.loc["2011":].index, on.loc["2011":], label="SHIBOR O/N", color=GREEN, alpha=0.8)
+    ax.plot(w1.loc["2011":].index, w1.loc["2011":], label="SHIBOR 1W (~DR007)", color=BLUE)
+    ax.plot(lprm.loc["2011":].index, lprm.loc["2011":], label="LPR 1Y", color=RED)
     ax.set_title("China Rate Corridor: Money-Market (O/N,1W) vs Loan Prime Rate")
     ax.set_ylabel("%"); ax.legend()
     fig.tight_layout(); fig.savefig(os.path.join(FIG, "f17_corridor.png"), dpi=130); plt.close(fig)
