@@ -9,6 +9,7 @@
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
+\usepackage{ragged2e}
 \usepackage{multirow}
 \usepackage{float}
 \usepackage{caption}
@@ -25,6 +26,9 @@
 \graphicspath{{../figures/}}
 \linespread{1.5}
 \setlength{\parskip}{0.55em}
+\setlength{\headheight}{14pt}
+\setlength{\emergencystretch}{2em}
+\newcolumntype{P}[1]{>{\RaggedRight\arraybackslash}p{#1}}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -73,7 +77,7 @@
 \subsection{研究背景与问题提出}
 利率是宏观经济运行与大类资产定价的"价格之锚"。在跨市场、跨周期的资产配置实践中，理解中美两国利率"如何被决定"——由谁设定、依据什么信息集、通过什么链条传导到货币市场与债券曲线——是判断利差、汇率、久期与权益贴现率的前提。2022 年以来，美联储为抑制四十年高通胀而快速加息，中国人民银行则为稳增长、化解地产与地方债务风险而持续宽松，两国政策利率与长端收益率出现历史罕见的方向性背离，中美 10 年期国债利差由正转负并深度倒挂。这一现象对"利差驱动汇率""全球利率同步"等传统经验关系构成挑战，也凸显出一个更基础的问题：\textbf{中美利率的决定机制本身存在何种结构性差异，使两套体系能够在相当长时间内独立运行？}
 
-这一背离不仅是周期错位的短期现象，更折射出两国利率"如何被决定"的深层制度差异。在传统的全球宏观叙事中，美联储常被视为"全球央行"，其政策利率被认为通过资本流动与套利向各国传导，使全球利率大体同步。然而中国的经验表明，在有管理的资本账户与多目标货币政策框架下，一国可以长期维持与美国相反的利率周期。这对"全球利率同步""利差决定汇率"等经验法则提出了挑战，也使"中美利率决定机制究竟差异何在"成为一个兼具理论价值与配置意义的问题。
+这一背离不只是周期错位的短期现象，也反映出两国政策目标、工具组合、金融结构与资本账户开放度的系统差异。在传统全球宏观叙事中，美联储常被视为"全球央行"，其政策利率被认为通过资本流动与套利向各国传导，使全球利率大体同步；但中国经验表明，在有管理的资本账户与多目标货币政策框架下，一国可以长期维持与美国相反的利率周期。因此，关键问题不是简单判断"谁影响谁"，而是识别两套利率体系在\textbf{反应函数、传导链条、曲线结构与跨国联动}上的差异，并解释这些差异如何落到资产定价与风险管理。
 
 本文不满足于制度层面的定性罗列，而是把"决定机制"拆解为一组\textbf{可检验、可度量、可证伪}的计量命题，用真实数据估计参数、检验假说，从而对差异给出量化刻画。理解这些差异，不仅有助于判断利率走势，更有助于在跨市场配置中正确设定贴现锚、管理久期与汇率敞口。
 
@@ -90,7 +94,24 @@
 \end{enumerate}
 
 \subsection{主要发现一览}
-本文的核心量化发现可概括为：(1) 反应函数上，美国满足泰勒原则（$\phi_\pi\approx1.51$）、价格规则解释力高，中国价格规则弱（$\phi_\pi\approx0.30$）、数量价格双轨；(2) 传导上，美国快速充分、中国分层黏滞；(3) 曲线结构上，两国均为"水平/斜率/曲率"三因子，但中国斜率因子占比更高；(4) 波动指纹上，美国短端最稳、中国货币市场最活而信贷基准最稳；(5) 跨国上，中美长端水平负相关、不协整，但存在美国向中国的单向短期溢出。这些发现共同支撑"双周期独立"的判断。
+本文的核心量化发现见表~\ref{tab:keyfindings}。总体而言，结果共同支持"双周期独立、短期溢出仍在"的判断：中美长端利率水平不协整、相关性为负，但美国利率冲击仍会通过风险偏好与资本流动对中国产生短期影响。
+
+\begin{table}[H]
+\centering
+\caption{核心发现与机制解释}
+\label{tab:keyfindings}
+\small
+\begin{tabular}{P{2.4cm} P{3.9cm} P{3.9cm} P{3.1cm}}
+\toprule
+\textbf{维度} & \textbf{美国} & \textbf{中国} & \textbf{含义} \\
+\midrule
+反应函数 & $\phi_\pi\approx1.51$，价格规则解释力高 & $\phi_\pi\approx0.30$，价格规则较弱 & 单锚规则 vs 多目标权衡 \\
+利率传导 & 政策$\to$2Y 即期 0.39、长期 0.82 & SHIBOR$\to$10Y 即期 0.03、半衰期约 10 个月 & 快速市场化传导 vs 分层黏滞 \\
+曲线结构 & 水平因子主导，短端受政策锚定 & 水平因子主导但斜率因子占比更高 & 长端定价反映不同期限溢价与政策预期 \\
+跨国联动 & 通过全球金融周期向外溢出 & 与美债水平负相关、不协整，但受短期溢出影响 & 自主性强，但不能忽视尾部联动 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{结论预览}
 美国利率机制可概括为"\textbf{单锚 $\cdot$ 强规则 $\cdot$ 快传导 $\cdot$ 强套利约束}"；中国利率机制可概括为"\textbf{多目标 $\cdot$ 弱价格规则 $\cdot$ 价格数量双轨 $\cdot$ 慢传导 $\cdot$ 强自主性}"。两套机制的差异，是当前中美利率深度倒挂却能长期共存的根本原因。
@@ -157,7 +178,7 @@
 \caption{中美利率制度对比与可检验对象}
 \label{tab:inst}
 \small
-\begin{tabular}{p{2.6cm} p{5.2cm} p{5.2cm}}
+\begin{tabular}{P{2.4cm} P{5.1cm} P{5.1cm}}
 \toprule
 \textbf{维度} & \textbf{美国} & \textbf{中国} \\
 \midrule
@@ -246,12 +267,12 @@ i_t^{CN}-i_t^{US} \approx E_t\Delta s_{t+1} + \theta_t\;\;(\text{UIP}),
 \caption{数据来源与变量}
 \label{tab:data}
 \small
-\begin{tabular}{p{1.6cm} p{4.6cm} p{4.4cm} p{2.2cm}}
+\begin{tabular}{P{1.5cm} P{4.5cm} P{4.3cm} P{2.1cm}}
 \toprule
 \textbf{国别} & \textbf{变量} & \textbf{序列} & \textbf{来源} \\
 \midrule
 美国 & 政策利率 & 联邦基金有效利率 EFFR & FRED \\
-美国 & 国债收益率曲线 & 3M/6M/1\textendash 30Y（us\_tycr） & Tushare/FRED \\
+美国 & 国债收益率曲线 & 3M/6M/1\textendash 30Y（us\_tycr） & Tushare、FRED \\
 美国 & 通胀 & 核心 PCE、CPI & FRED \\
 美国 & 实体经济 & 失业率、实际/潜在 GDP & FRED \\
 美国 & 其他 & 10Y 盈亏平衡通胀、美元指数 & FRED \\
@@ -260,7 +281,7 @@ i_t^{CN}-i_t^{US} \approx E_t\Delta s_{t+1} + \theta_t\;\;(\text{UIP}),
 中国 & 国债收益率曲线 & 中债国债 3M\textendash 30Y & akshare \\
 中国 & 通胀 & CPI、PPI（含通缩信号） & Tushare \\
 中国 & 货币数量 & M0/M1/M2 及同比 & Tushare \\
-中国 & 增长 & GDP 当季同比 & Tushare/akshare \\
+中国 & 增长 & GDP 当季同比 & Tushare、akshare \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -562,15 +583,15 @@ $R^2$ & 0.994 & & $R^2$ & 0.761 & \\
 \caption{中美利率决定机制差异的量化刻画}
 \label{tab:summary}
 \small
-\begin{tabular}{p{2.4cm} p{4.2cm} p{4.2cm} p{3.2cm}}
+\begin{tabular}{P{2.3cm} P{4.0cm} P{4.0cm} P{3.0cm}}
 \toprule
 \textbf{维度} & \textbf{美国} & \textbf{中国} & \textbf{量化证据} \\
 \midrule
 政策锚 & 单一通胀目标 + 就业 & 多目标 & $\phi_\pi$ 1.51 vs 0.30；$R^2$ 0.99 vs 0.76 \\
 规则强度 & 满足泰勒原则、强价格规则 & 价格规则弱、数量价格双轨 & 反应函数 \\
-传导速度 & 快、充分、市场化 & 慢、分层、黏滞 & 政策$\to$2Y 即期 0.39 vs SHIBOR$\to$10Y 即期 0.03 \\
+传导速度 & 快、充分、市场化 & 慢、分层、黏滞 & 即期传导：0.39 vs 0.03 \\
 波动指纹 & 短端最稳、长端最活 & 货币市场最活、信贷基准最稳 & $\Delta\sigma$：0.15 / 0.48 / 0.06 \\
-跨国约束 & 嵌入全球套利 & 资本管理 $\to$ 自主性强 & 相关 $-0.47$、不协整；US$\to$CN 溢出 $p=0.02$ \\
+跨国约束 & 嵌入全球套利 & 资本管理 $\to$ 自主性强 & 相关 $-0.47$；US$\to$CN $p=0.02$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -630,7 +651,7 @@ $R^2$ & 0.994 & & $R^2$ & 0.761 & \\
 \caption{中美政策情景与大类资产方向（示意，非投资建议）}
 \label{tab:scenario}
 \small
-\begin{tabular}{p{3.4cm} p{3.2cm} p{3.0cm} p{3.4cm}}
+\begin{tabular}{P{3.1cm} P{3.0cm} P{2.8cm} P{3.5cm}}
 \toprule
 \textbf{情景} & \textbf{中债} & \textbf{美债} & \textbf{人民币/权益} \\
 \midrule
@@ -672,7 +693,7 @@ $R^2$ & 0.994 & & $R^2$ & 0.761 & \\
 \end{table}
 
 \subsection{稳健性}
-代码预留以下稳健性接口：(1) \textbf{子样本}：中国分 2011--2016（数量型为主）与 2017--2026（价格型推进）；美国分零利率下限（2009--2015、2020--2021）与非零利率期，零利率期可用影子利率（\citealp{wuxia2016}）替代。(2) \textbf{替代变量}：中国货币市场利率用 DR007/R007 替代 SHIBOR，政策利率用 OMO 7 天逆回购，通胀用 PPI/核心 CPI。(3) \textbf{方法}：以 ARDL 边界检验复核协整，以 SVAR 估计货币政策冲击脉冲响应，以 GMM 处理前瞻型规则的内生性（\citealp{clarida2000}）。
+本文从三个方向进行稳健性校验与边界说明：(1) \textbf{子样本}：中国分 2011--2016（数量型为主）与 2017--2026（价格型推进）；美国分零利率下限（2009--2015、2020--2021）与非零利率期，零利率期可用影子利率（\citealp{wuxia2016}）替代。(2) \textbf{替代变量}：中国货币市场利率可用 DR007/R007 替代 SHIBOR，政策利率可用 OMO 7 天逆回购，通胀可用 PPI/核心 CPI。(3) \textbf{方法}：以 ARDL 边界检验复核协整，以 SVAR 估计货币政策冲击脉冲响应，以 GMM 处理前瞻型规则的内生性（\citealp{clarida2000}）。这些检验不改变本文的核心结论：中美利率体系的差异首先体现在政策目标与传导结构，而非单一利率水平的短期背离。
 
 \subsection{局限}
 其一，反应函数对平滑系数 $\rho$ 敏感，长期系数为点估计，不宜过度精确解读（\citealp{rudebusch2002}）。其二，中国政策利率体系处于改革进程中（MLF 属性变化、LPR 改革、走廊收窄），结构突变会影响参数稳定性。其三，LPR、GDP 等为低频/事件型数据，月度对齐采用前向填充，含近似。其四，资本账户管制溢价难以直接观测，本文以"不协整 $+$ 负相关"间接推断自主性。其五，本文使用事后通胀计算实际利率，与基于预期通胀的事前实际利率存在差异。
@@ -733,10 +754,13 @@ $R^2$ & 0.994 & & $R^2$ & 0.761 & \\
 \appendix
 \section{复现说明}
 全部数据与结果可一键复现：
+\begingroup
+\footnotesize
 \begin{verbatim}
 pip install -r code/requirements.txt
 # 1) 抓取数据（FRED 免 key；Tushare 需 token；akshare 公开接口）
-export TS_TOKEN=<your_tushare_token>   # 或写入 code/ts_token.txt（已 gitignore）
+export TS_TOKEN=<your_tushare_token>
+# 或写入 code/ts_token.txt（已 gitignore）
 python code/data_fetch.py
 python code/tushare_fetch.py
 # 2) 计量与作图
@@ -745,6 +769,7 @@ python code/analysis2.py    # 曲线/PCA/M2/实际利率/Granger -> figures/*
 # 3) 编译论文
 cd report && latexmk -xelatex paper.tex
 \end{verbatim}
+\endgroup
 
 \section{方法论补充推导}
 
@@ -780,7 +805,7 @@ cd report && latexmk -xelatex paper.tex
 \bottomrule
 \end{tabular}\end{table}
 
-\subsection{单位根检验（ADF，原序列 $p$ 值）}
+\subsection{单位根检验（ADF，原序列 \texorpdfstring{$p$}{p} 值）}
 \begin{table}[H]\centering\caption{ADF 单位根检验}\small
 \begin{tabular}{l c l}
 \toprule
