@@ -1,5 +1,22 @@
 # 中美利率决定机制差异：量化研究 | China–US Interest-Rate Determination: A Quantitative Study
 
+## 2026-10-02：季度更新、滚动参数与样本敏感性
+
+[补充报告](report/quarterly_validation/report.md)、[数据来源和覆盖范围](data/validation_20260930/sources.json)及[论文 PDF](report/paper.pdf)已同步。美国利率及 SHIBOR 刷新至 9 月，两国通胀实际到 8 月，所以共同估计截止 2026-08-31；中国国债收益率仍为原 6 月快照，旧曲线图没有冒充三季度数据。
+
+新增 60 月滚动系数、2011/2017/2020 起始样本和排除 2020–2021 年的敏感性，使用 HAC(12) 标准误及长期系数的 delta method 近似区间。完整月历先构造滞后再剔除缺值，避免缺月拼接；滚动参数保留原值，不裁剪异常系数。
+
+关键发现：双变量模型的长期系数 `beta/(1-rho)` 对近单位根极敏感。中国 2017 年起样本的点估计为 -13.60，但 95% 近似区间约为 [-834.85, 807.65]；美国三个起始样本也都触发近单位根标记。不能只据点估计判断 Taylor 原则。补充模型与正文含就业/GDP 控制项的历史多变量模型不同；SHIBOR 是货币市场代理，不能直接解释为央行政策规则。
+
+```bash
+# 从保存的季度快照离线重建
+python code/quarterly_validation.py --cutoff 2026-09-30
+# 刷新数据（Tushare 使用环境变量 TUSHARE_TOKEN 或 TS_TOKEN）
+python code/quarterly_validation.py --cutoff 2026-09-30 --refresh
+```
+
+English: the dated supplement adds source receipts, actual field coverage, common-month subsamples, HAC uncertainty and unclipped rolling coefficients. It uses a bivariate specification and preserves the original multivariate results as historical estimates. Data observation dates are not release dates; this is not a real-time vintage backtest.
+
 <p align="center">
   <a href="#中文"><img src="https://img.shields.io/badge/%E4%B8%AD%E6%96%87-%E8%B7%B3%E8%BD%AC-E84D3D?style=for-the-badge&labelColor=3B3F47" alt="中文"></a>
   &nbsp;
@@ -17,7 +34,7 @@
 
 ## 中文
 
-### 一句话结论
+### 原报告结论（历史多变量模型；新增敏感性见上）
 
 > **美国** = 单锚（2% 通胀）· 强规则（Taylor φ_π ≈ 1.51 > 1）· 快传导（政策→2Y 即期 0.39）· 强全球套利约束。
 > **中国** = 多目标 · 弱价格规则（φ_π ≈ 0.30 < 1，R² 0.76 vs 美 0.99）· 价格–数量双轨 · 慢传导（SHIBOR→10Y 即期 0.03）· 强自主性（中美 10Y 相关 −0.18、不协整，利差 −2.72%）。

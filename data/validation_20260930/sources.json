@@ -1,0 +1,86 @@
+{
+  "requested_cutoff": "2026-09-30",
+  "sources": [
+    {
+      "source": "FEDFUNDS",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=FEDFUNDS&cosd=1989-01-01&coed=2026-09-30",
+      "status": "refreshed",
+      "last_observation": "2026-09-01"
+    },
+    {
+      "source": "PCEPILFE",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=PCEPILFE&cosd=1989-01-01&coed=2026-09-30",
+      "status": "refreshed",
+      "last_observation": "2026-08-01"
+    },
+    {
+      "source": "UNRATE",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE&cosd=1989-01-01&coed=2026-09-30",
+      "status": "refreshed",
+      "last_observation": "2026-08-01"
+    },
+    {
+      "source": "DGS2",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS2&cosd=1989-01-01&coed=2026-09-30",
+      "status": "refreshed",
+      "last_observation": "2026-09-30"
+    },
+    {
+      "source": "DGS10",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=1989-01-01&coed=2026-09-30",
+      "status": "refreshed",
+      "last_observation": "2026-09-30"
+    },
+    {
+      "source": "shibor",
+      "params": {
+        "start_date": "20260101",
+        "end_date": "20260930"
+      },
+      "status": "refreshed",
+      "last_observation": "2026-09-30"
+    },
+    {
+      "source": "cn_cpi",
+      "params": {
+        "start_m": "202601",
+        "end_m": "202609"
+      },
+      "status": "refreshed",
+      "last_observation": "2026-08-31"
+    }
+  ],
+  "coverage": [
+    {
+      "country": "US",
+      "column": "fed_funds_effective",
+      "last_observation": "2026-09-30"
+    },
+    {
+      "country": "US",
+      "column": "core_pce_yoy",
+      "last_observation": "2026-08-31"
+    },
+    {
+      "country": "US",
+      "column": "ust_10y",
+      "last_observation": "2026-09-30"
+    },
+    {
+      "country": "CN",
+      "column": "cn_shibor1w",
+      "last_observation": "2026-09-30"
+    },
+    {
+      "country": "CN",
+      "column": "cn_cpi_yoy",
+      "last_observation": "2026-08-31"
+    },
+    {
+      "country": "CN",
+      "column": "cn_10y",
+      "last_observation": "2026-06-30"
+    }
+  ],
+  "vintage": "current retrieved/repository vintage; observation cutoff is not a historical release-time vintage"
+}
